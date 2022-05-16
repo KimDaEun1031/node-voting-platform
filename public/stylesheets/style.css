@@ -1,8 +1,140 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
-a {
-  color: #00B7FF;
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: inline-block;
+}
+
+body {
+  line-height: 1;
+  text-align: center;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a:link {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+button, input {
+  outline: none;
+  border: none;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(138, 71, 201);
+  cursor: pointer;
+}
+
+input {
+  background-color: rgba(138, 71, 201, 0.229);
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.263);
+  background-color: rgb(255, 255, 255);
+}
+
+header .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo img {
+  height: 50px;
+  margin: 10px;
+}
+
+header .register {
+  display: flex;
+}
+
+header .register .login,
+header .register .signup {
+  margin: 10px;
+}
+
+header .register .login .login-btn,
+header .register .signup .signup-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(138, 71, 201);
+  cursor: pointer;
+}
+
+header nav .menu span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(138, 71, 201);
+}
+
+header nav .menu .line {
+  width: 45px;
+  height: 3px;
+  margin-top: 7px;
+  border-radius: 5px 5px 0 0;
+  background-color: rgb(138, 71, 201);
+
+}
+
+article {
+  width: 100%;
+  height: 100vh;
+  padding: 110px 0 10px 0;
+  background-color: rgb(252, 249, 255);
 }

@@ -1,1 +1,40 @@
-<h1>newVoting</h1>
+<%-include("./includes/header.ejs") %>
+  <link rel="stylesheet" href="/public/stylesheets/newVoting.css">
+  <article>
+    <form action="/votings/new" method="post">
+      <div class="vote-content">
+        <div class="title">
+          <input type="text" name="vote_title" class="vote-title" value="제목 없는 설문지">
+        </div>
+        <ul class="options">
+          <li class="option">
+            <input type="radio" name="vote_checked" class="vote-checked">
+            <input type="text" name="vote_check_title" class="vote-check-title" value="option">
+            <button class="delete-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </li>
+          <li class="option">
+            <input type="radio" name="vote_checked" class="vote-checked">
+            <input type="text" name="vote_check_title" class="vote-check-title" value="option">
+            <button class="delete-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </li>
+          <li class="option">
+            <input type="radio" name="vote_checked" class="vote-checked">
+            <input type="text" name="vote_check_title" class="vote-check-title" value="option">
+            <button class="delete-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </li>
+        </ul>
+        <button type="button" class="option-btn">옵션 추가</button>
+        <div class="expiration-date">
+          <input type="datetime-local" name="vote_expiration_date" class="vote-expiration-date">
+        </div>
+        <button type="submit" class="submit-btn">제출</button>
+      </div>
+    </form>
+  </article>
+<%-include("./includes/footer.ejs") %>

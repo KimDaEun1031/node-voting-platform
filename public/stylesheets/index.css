@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'NelnaLizzyChae';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/NelnaLizzyChae.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+article ul {
+  display: flex;
+  margin: 0 20px;
+}
+
+article ul li {
+  width: 240px;
+  height: 80px;
+  border: 1px solid rgba(135, 135, 135, 0.332);
+  border-radius: 8px;
+}
+
+article ul li button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 8px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+}
+
+article ul li button .vote-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3px 5px 5px 5px;
+  height: 30px;
+}
+
+article ul li button .vote-header .vote-title {
+  font-size: 30px;
+  font-family: 'NelnaLizzyChae';
+}
+
+article ul li button .vote-header .vote-completed {
+  padding: 2px 7px 1px 7px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid rgb(138, 71, 201);
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(138, 71, 201);
+}
+
+article ul li button .vote-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 40px;
+}
+
+article ul li button .vote-content .vote-creator {
+  padding: 3px 2px 2px 3px;
+  border: 2px rgba(138, 71, 201, 0.386);
+  border-radius: 0 10px 0 0;
+  border-style: dashed dashed none none;
+}
+
+article ul li button .vote-content .vote-expiration-date {
+  padding: 3px 2px 2px 3px;
+  border: 2px rgba(138, 71, 201, 0.386);
+  border-radius: 10px 0 10px 0;
+  border-style: dashed none none dashed;
+}
+
+article .button-group {
+  margin-bottom: 30px;
+}
+
+article .button-group ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+article .button-group ul li {
+  width: 150px;
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 5px solid rgb(138, 71, 201);
+}
+
+article .button-group ul li button {
+  border-radius: 0;
+
+}

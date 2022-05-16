@@ -1,1 +1,19 @@
-<h1>index</h1>
+<%-include("./includes/header.ejs") %>
+  <link rel="stylesheet" href="/public/stylesheets/index.css">
+  <article>
+    <ul>
+      <li>
+        <button onclick="location.href='/votings/1'">
+          <div class="vote-header">
+            <h4 class="vote-title">음식 투표하기</h4>
+            <span class="vote-completed">진행 중</span>
+          </div>
+          <div class="vote-content">
+            <span class="vote-creator">defs12</span>
+            <span class="vote-expiration-date">2022-05-14</span>
+          </div>
+        </button>
+      </li>
+    </ul>
+  </article>
+<%-include("./includes/footer.ejs") %>

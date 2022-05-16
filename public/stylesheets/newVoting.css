@@ -1,0 +1,31 @@
+article form {
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+article form .vote-content {
+  margin-top: 10px;
+}
+
+article form .vote-content .title {
+  padding: 10px;
+}
+
+article form .vote-content .title .vote-title {
+  width: 80%;
+  height: 40px;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+article form .vote-content .options .option {
+  width: 90%;
+  margin: 10px 5px;
+}
+
+article form .vote-content .options .option .vote-check-title {
+  width: 80%;
+  height: 30px;
+  font-size: 16px;
+}

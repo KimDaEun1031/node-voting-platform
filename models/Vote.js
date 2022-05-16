@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require('./User');
 
 const voteOptionsSchema = new mongoose.Schema(
   {
@@ -29,8 +28,9 @@ const voteSchema = new mongoose.Schema(
     vote_expiration_date: {
       type: Date,
       required: true,
-      min: Date.now() - 1,
-      max: Date.now() - 30,
+      min: Date.now(),
+      max: Date.now() + 30,
+      default: Date.now(),
     },
     vote_completed: {
       type: Boolean,

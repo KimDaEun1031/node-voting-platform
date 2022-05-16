@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       match: [/(?=.*\d)(?=.*[a-z]).{8,}/, "Please fill a valid password"],
     },
+    user_votes: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Vote',
+      required: true,
+    }
   }
 );
 

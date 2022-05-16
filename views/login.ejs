@@ -1,1 +1,16 @@
-<h1>login</h1>
+<%-include("./includes/header.ejs") %>
+  <link rel="stylesheet" href="/public/stylesheets/register.css">
+  <article>
+    <form action="/login" method="post" class="login-form">
+      <div class="user-email">
+        <i class="fas fa-envelope"></i>
+        <input type="email" class="email-input" name="user_email" placeholder="email">
+      </div>
+      <div class="user-pw">
+        <i class="fas fa-lock"></i>
+        <input type="password" class="pw-input" name="user_password" placeholder="password">
+      </div>
+      <button type="submit" class="submit-btn">SIGN IN</button>
+    </form>
+  </article>
+<%-include("./includes/footer.ejs") %>

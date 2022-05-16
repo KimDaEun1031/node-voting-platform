@@ -1,0 +1,42 @@
+article {
+  margin-top: 100px;
+}
+
+article form {
+  width: 250px;
+  height: 13%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 3px solid rgb(138, 71, 201);
+  border-radius: 10px;
+}
+
+article .signup-form {
+  height: 17%;
+}
+
+article form .user-email,
+article form .user-pw,
+article form .user-pw-check {
+  margin: 10px;
+  border-radius: 10px;
+  background-color: rgba(138, 71, 201, 0.229);
+}
+
+article form .user-email .email-input,
+article form .user-pw .pw-input,
+article form .user-pw-check .pw-check-input {
+  width: 80%;
+  height: 25px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+article form .submit-btn {
+  margin-top: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(138, 71, 201);
+  cursor: pointer;
+}
