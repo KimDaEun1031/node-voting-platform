@@ -1,6 +1,12 @@
 exports.getAllVoteList = async (req, res, next) => {
   try {
-    res.render("index");
+    let flag = false;
+
+    if (req.session.user) {
+      flag = true;
+    }
+
+    res.render("index", { isLogin : flag });
   } catch (error) {
     next(error);
   }

@@ -16,19 +16,25 @@
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Google_Forms_2020_Logo.svg/1489px-Google_Forms_2020_Logo.svg.png" alt="logo">
         </a>
       </div>
-      <div class="register">
-        <div class="login">
-          <button class="login-btn" onclick="location.href='/login'">Login</button>
-        </div>
-        <!-- <div class="logout">
-          <button class="logout-btn" onclick="location.href='/logout'">Logout</button>
-        </div> -->
-        <div class="signup">
-          <button class="signup-btn" onclick="location.href='/signup'">Sign Up</button>
-        </div>
-        <!-- <div class="myPage">
-          <button class="myPage-btn" onclick="location.href='/my-votings'">Mypage</button>
-        </div> -->
+      <div class="button-group">
+        <% if (isLogin) { %>
+          <div class="logout">
+            <button class="logout-btn" onclick="location.href='/logout'">Logout</button>
+          </div>
+          <div class="myPage">
+            <button class="myPage-btn" onclick="location.href='/my-votings'">Mypage</button>
+          </div>
+          <div class="newVote">
+            <button class="new-vote-btn" onclick="location.href='/votings/new'">Create</button>
+          </div>
+        <% } else { %>
+          <div class="login">
+            <button class="login-btn" onclick="location.href='/login'">Login</button>
+          </div>
+          <div class="signup">
+            <button class="signup-btn" onclick="location.href='/signup'">Sign Up</button>
+          </div>
+        <% } %>
       </div>
     </div>
     <!-- <nav>

@@ -7,8 +7,12 @@ const {
   getShowVoting,
 } = require("../controllers/voteController");
 
-router.get('/new', getNewVoting);
-router.post('/new', postNewVoting);
+const {
+  authentication,
+} = require('../middleware/authentication');
+
+router.get('/new', authentication, getNewVoting);
+router.post('/new', authentication, postNewVoting);
 
 router.get('/:id', getShowVoting);
 

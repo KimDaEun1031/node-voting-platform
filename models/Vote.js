@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 
 const voteOptionsSchema = new mongoose.Schema(
   {
-    vote_check_title: {
+    vote_content: {
       type: String,
       required: true,
     },
-    vote_checked: {
-      type: Boolean,
-      default: false,
-    }
+    voter: [
+      {
+        type: String,
+      }
+    ]
   }
 );
 

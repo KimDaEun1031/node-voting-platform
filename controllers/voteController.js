@@ -1,6 +1,6 @@
 exports.getNewVoting = (req, res, next) => {
   try {
-    res.render("newVoting");
+    res.render("newVoting", { isLogin : true });
   } catch (error) {
     next(error)
   }
@@ -16,7 +16,7 @@ exports.postNewVoting = async (req, res, next) => {
 
 exports.getShowVoting = (req, res, next) => {
   try {
-    res.render("showVoting");
+    res.render("showVoting", { isLogin : false });
   } catch (error) {
     next(error)
   }
@@ -24,7 +24,7 @@ exports.getShowVoting = (req, res, next) => {
 
 exports.getMyVoting = (req, res, next) => {
   try {
-    res.render("myVoting");
+    res.render("myVoting", { isLogin : true });
   } catch (error) {
     next(error)
   }

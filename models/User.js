@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
@@ -9,20 +10,22 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       unique: true,
       index: true,
-      required: "Email address is required",
-      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"],
+      match: [/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g, "Please fill a valid email address"],
     },
     user_password: {
       type: String,
       required: true,
-      match: [/(?=.*\d)(?=.*[a-z]).{8,}/, "Please fill a valid password"],
+      match: [/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, "Please fill a valid password"],
     },
     user_votes: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Vote',
-      required: true,
     }
   }
 );
+
+userSchema.pre("save", async function () {
+  this.user_password = await bcrypt.hash(this.user_password, 5);
+});
 
 module.exports = mongoose.model("User", userSchema);
