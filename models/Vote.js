@@ -5,6 +5,7 @@ const voteOptionsSchema = new mongoose.Schema(
     vote_content: {
       type: String,
       required: true,
+      default: "",
     },
     voter: [
       {
@@ -30,7 +31,6 @@ const voteSchema = new mongoose.Schema(
       type: Date,
       required: true,
       min: Date.now(),
-      max: Date.now() + 30,
       default: Date.now(),
     },
     vote_completed: {

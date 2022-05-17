@@ -12,19 +12,20 @@ const {
   getLogout,
 } = require("../controllers/signController");
 
+const { authentication } = require('../middleware/authentication');
+
 const {
-  signUpAuthentication,
-  loginAuthentication,
-  authentication,
-} = require('../middleware/authentication');
+  validateSignUpForm,
+  validateLoginForm,
+} = require('../middleware/validation');
 
 router.get('/', getAllVoteList);
 
 router.get('/login', getLogin);
-router.post('/login', loginAuthentication, postLogin);
+router.post('/login', validateLoginForm, postLogin);
 
 router.get('/signup', getSignUp);
-router.post('/signup', signUpAuthentication, postSignUp);
+router.post('/signup', validateSignUpForm, postSignUp);
 
 router.get('/logout', getLogout);
 
