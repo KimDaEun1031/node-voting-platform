@@ -7,12 +7,17 @@
 
 article ul {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0 20px;
 }
 
 article ul li {
   width: 240px;
   height: 80px;
+  min-width: 240px;
+  min-height: 80px;
+  margin: 10px 30px;
   border: 1px solid rgba(135, 135, 135, 0.332);
   border-radius: 8px;
 }

@@ -12,7 +12,7 @@ const {
   getLogout,
 } = require("../controllers/signController");
 
-const { authentication } = require('../middleware/authentication');
+const { isLogin } = require('../middleware/authentication');
 
 const {
   validateSignUpForm,
@@ -29,6 +29,6 @@ router.post('/signup', validateSignUpForm, postSignUp);
 
 router.get('/logout', getLogout);
 
-router.get('/my-votings', authentication, getMyVoting);
+router.get('/my-votings', isLogin, getMyVoting);
 
 module.exports = router;

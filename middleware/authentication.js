@@ -1,4 +1,4 @@
-exports.authentication = (req, res, next) => {
+exports.isLogin = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {

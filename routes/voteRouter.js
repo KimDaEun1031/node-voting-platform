@@ -5,15 +5,17 @@ const {
   getNewVoting,
   postNewVoting,
   getShowVoting,
+  postShowVoting,
 } = require("../controllers/voteController");
 
 const {
-  authentication,
+  isLogin,
 } = require('../middleware/authentication');
 
-router.get('/new', authentication, getNewVoting);
-router.post('/new', authentication, postNewVoting);
+router.get('/new', isLogin, getNewVoting);
+router.post('/new', isLogin, postNewVoting);
 
 router.get('/:id', getShowVoting);
+router.post('/:id',isLogin, postShowVoting);
 
 module.exports = router;

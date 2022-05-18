@@ -1,30 +1,52 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/newVoting.css">
   <article>
-    <form action="/votings/" method="post">
-      <div class="vote-content">
-        <div class="title">
-          <input type="text" name="vote_title" class="vote-title" value="음식 투표하기">
-        </div>
-        <ul class="options">
-          <li class="option">
-            <input type="radio" name="vote_checked" class="vote-checked">
-            <input type="text" name="vote_check_title" class="vote-check-title" value="떡볶이" readonly>
-          </li>
-          <li class="option">
-            <input type="radio" name="vote_checked" class="vote-checked">
-            <input type="text" name="vote_check_title" class="vote-check-title" value="김치국" readonly>
-          </li>
-          <li class="option">
-            <input type="radio" name="vote_checked" class="vote-checked">
-            <input type="text" name="vote_check_title" class="vote-check-title" value="마라탕" readonly>
-          </li>
-        </ul>
-        <div class="expiration-date">
-          <input type="datetime-local" name="vote_expiration_date" class="vote-expiration-date">
-        </div>
-        <button type="button" class="submit-btn">취소</button>
+    <div class="vote">
+      <div class="title">
+        <input
+        type="text"
+        name="vote_title"
+        class="vote-title"
+        value="<%= vote.vote_title %>"
+        >
       </div>
-    </form>
+      <p class="creator"><%= userId %></p>
+      <form action="/votings/<%= vote._id %>" method="post">
+        <ul class="options">
+          <% for (const option of vote.vote_options) { %>
+            <li class="option">
+              <input
+                type="radio"
+                name="vote_checked"
+                class="vote-checked"
+                value="<%= option.vote_content %>"
+                required
+              >
+              <span class="vote-content">
+                <%= option.vote_content %>
+              </span>
+              <span><%= option.voter.length %></span>
+            </li>
+          <% } %>
+        </ul>
+        <button type="submit" class="submit-btn">제출</button>
+      </form>
+      <div class="expiration-date">
+        <%
+          const expirationDate = vote.vote_expiration_date.toISOString().substring(0, 16);
+          const currentDate = new Date().toISOString().substring(0, 16);
+        %>
+        <input
+          type="datetime-local"
+          name="vote_expiration_date"
+          class="vote-expiration-date"
+          value="<%= expirationDate %>"
+          min="<%= currentDate %>"
+          max="<%= expirationDate %>"
+          readonly
+        >
+      </div>
+    </div>
+    <button type="button" class="back-btn">취소</button>
   </article>
 <%-include("./includes/footer.ejs") %>

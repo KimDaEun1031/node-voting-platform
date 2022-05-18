@@ -1,4 +1,4 @@
-  const Vote = require("../models/Vote");
+const Vote = require("../models/Vote");
 const User = require("../models/User");
 
 exports.getNewVoting = (req, res, next) => {
@@ -40,9 +40,45 @@ exports.postNewVoting = async (req, res, next) => {
   }
 };
 
-exports.getShowVoting = (req, res, next) => {
+exports.getShowVoting = async (req, res, next) => {
   try {
-    res.render("showVoting", { isLogin : false });
+    let flag = false;
+
+    if (req.session.user) {
+      flag = true;
+    }
+
+    const vote = await Vote.findOne({ _id: req.params.id });
+    const user = await User.findOne({ _id: vote.vote_user });
+    const userId = user.user_email.split("@")[0];
+
+    if (!vote) {
+      next(error);
+    }
+
+    res.render("showVoting", { isLogin : flag, vote, userId });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.postShowVoting = async (req, res, next) => {
+  try {
+    const { vote_checked } = req.body;
+    const { user_email } = req.session.user;
+
+    const vote = await Vote.findOne({ _id: req.params.id });
+    const user = await User.findOne({ _id: vote.vote_user });
+    const userId = user.user_email.split("@")[0];
+
+    for (const option of vote.vote_options) {
+      if (option.vote_content === vote_checked) {
+        option.voter.push(user_email);
+        vote.save();
+      }
+    }
+
+    res.render("showVoting", { isLogin : true, vote, userId });
   } catch (error) {
     next(error);
   }
