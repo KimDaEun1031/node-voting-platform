@@ -2,24 +2,24 @@ body {
   position: relative;
 }
 
-.flash-massage {
+.flash-message {
   position: absolute;
-  display: none;
   width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(55, 55, 55, 0.342);
+  top: 320px;
+  left: 20%;
 }
 
-.flash-massage p {
-  visibility:hidden;
+.flash-message .message {
+  width: 60%;
+  padding: 50px 0;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.315);
+}
+
+.flash-message .remove {
+  visibility: visible;
   transform-origin: top center;
   opacity: 0;
-  transition:all 0.5s;
-}
-
-.flash-massage .show {
-  visibility:visible;
-  opacity: 1;
+  transition: all .5s;
 }

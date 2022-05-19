@@ -15,13 +15,15 @@
         <ul class="options">
           <% for (const option of vote.vote_options) { %>
             <li class="option">
-              <input
-                type="radio"
-                name="vote_checked"
-                class="vote-checked"
-                value="<%= option.vote_content %>"
-                required
-              >
+              <% if (!vote.vote_completed) { %>
+                <input
+                  type="radio"
+                  name="vote_checked"
+                  class="vote-checked"
+                  value="<%= option.vote_content %>"
+                  required
+                >
+              <% } %>
               <span class="vote-content">
                 <%= option.vote_content %>
               </span>
@@ -29,24 +31,40 @@
             </li>
           <% } %>
         </ul>
-        <button type="submit" class="submit-btn">제출</button>
+        <% if (!vote.vote_completed) { %>
+          <button type="submit" class="submit-btn">제출</button>
+        <% } %>
       </form>
       <div class="expiration-date">
         <%
           const expirationDate = vote.vote_expiration_date.toISOString().substring(0, 16);
-          const currentDate = new Date().toISOString().substring(0, 16);
         %>
         <input
           type="datetime-local"
           name="vote_expiration_date"
           class="vote-expiration-date"
           value="<%= expirationDate %>"
-          min="<%= currentDate %>"
-          max="<%= expirationDate %>"
           readonly
         >
       </div>
     </div>
-    <button type="button" class="back-btn">취소</button>
+    <button
+      type="button"
+      class="back-btn"
+      onclick="location.href='/'"
+    >
+      취소
+    </button>
+    <%
+      if (isSameUser) {
+    %>
+      <button
+        type="submit"
+        class="back-btn"
+        onclick="location.href='/votings/delete/<%= vote._id %>'"
+      >
+        삭제
+      </button>
+    <% } %>
   </article>
 <%-include("./includes/footer.ejs") %>

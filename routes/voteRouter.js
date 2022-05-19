@@ -6,6 +6,7 @@ const {
   postNewVoting,
   getShowVoting,
   postShowVoting,
+  deleteVoting,
 } = require("../controllers/voteController");
 
 const {
@@ -17,5 +18,7 @@ router.post('/new', isLogin, postNewVoting);
 
 router.get('/:id', getShowVoting);
 router.post('/:id',isLogin, postShowVoting);
+
+router.get('/delete/:id', deleteVoting);
 
 module.exports = router;

@@ -1,6 +1,12 @@
-  <div class="flash-massage">
-    <p>로그인에 성공하셨습니다</p>
-  </div>
-  <script src="/public/javascripts/footer.js"></script>
+  <%
+    if (flashMessage.message) {
+  %>
+    <div class="flash-message">
+      <div class="message">
+        <p><%= flashMessage.message %></p>
+      </div>
+    </div>
+  <% } %>
+  <script src="/public/javascripts/flashMessage.js"></script>
 </body>
 </html>

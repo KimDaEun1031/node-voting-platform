@@ -1,21 +1,25 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/index.css">
   <article>
-    <ul>
-      <% for (const data of voteList) { %>
-        <li>
-          <button onclick="location.href='/votings/<%= data._id %>'">
-            <div class="vote-header">
-              <h4 class="vote-title"><%= data.vote_title %> </h4>
-              <span class="vote-completed"><%= data.vote_completed ? "완료" : "진행 중" %></span>
-            </div>
-            <div class="vote-content">
-              <span class="vote-creator"><%= data.vote_user %> </span>
-              <span class="vote-expiration-date"><%= data.vote_expiration_date %></span>
-            </div>
-          </button>
-        </li>
-      <% } %>
-    </ul>
+    <% if (voteList.length === 0) { %>
+      <h2>등록된 게시물이 없습니다.</h2>
+    <% } else { %>
+      <ul>
+        <% for (const data of voteList) { %>
+          <li>
+            <button onclick="location.href='/votings/<%= data._id %>'">
+              <div class="vote-header">
+                <h4 class="vote-title"><%= data.vote_title %> </h4>
+                <span class="vote-completed"><%= data.vote_completed ? "완료" : "진행 중" %></span>
+              </div>
+              <div class="vote-content">
+                <span class="vote-creator"><%= data.vote_user %> </span>
+                <span class="vote-expiration-date"><%= data.vote_expiration_date %></span>
+              </div>
+            </button>
+          </li>
+        <% } %>
+      </ul>
+    <% } %>
   </article>
 <%-include("./includes/footer.ejs") %>

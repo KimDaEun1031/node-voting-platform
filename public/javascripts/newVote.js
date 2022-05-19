@@ -42,3 +42,8 @@ const removeOption = (event) => {
 }
 
 optionBtn.addEventListener("click", createOption);
+
+const date = document.querySelector(".vote-expiration-date");
+const currentDate = new Date().toISOString().substring(0, 16);
+
+date.setAttribute("min", currentDate);

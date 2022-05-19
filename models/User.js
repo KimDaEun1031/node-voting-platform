@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       match: [/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, "Please fill a valid password"],
     },
-    user_votes: {
+    user_votes: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Vote',
-    }
+    }]
   }
 );
 

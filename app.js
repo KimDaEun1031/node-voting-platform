@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const indexRouter = require("./routes/indexRouter");
 const voteRouter = require("./routes/voteRouter");
@@ -22,6 +23,11 @@ app.use(session({
     maxAge: 24000 * 60 * 60,
   },
 }));
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashMessage = req.flash();
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,7 +47,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error", { err });
 });
 
 module.exports = app;
