@@ -1,7 +1,7 @@
 const Vote = require("../models/Vote");
 const User = require("../models/User");
 
-const { checkTime, validationDate } = require("../public/javascripts/validationDate");
+const { checkExpirationTime, validationDate } = require("../public/javascripts/validationDate");
 
 exports.getNewVoting = (req, res, next) => {
   try {
@@ -14,44 +14,53 @@ exports.getNewVoting = (req, res, next) => {
 exports.postNewVoting = async (req, res, next) => {
   try {
     const {
-      vote_title,
-      vote_content,
-      vote_expiration_date,
+      voteTitle,
+      voteContent,
+      voteExpirationDate,
     } = req.body;
 
-    const result = validationDate(vote_expiration_date);
+    if (!voteTitle || !voteContent || !voteExpirationDate) {
+      req.flash("message", "모든 칸을 채워주세요.");
+      return res.redirect("/votings/new");
+    }
+
+    const result = validationDate(voteExpirationDate);
 
     if (!result) {
       req.flash("message", "닐짜와 시간을 현재 시간보다 낮게 잡을 수 없습니다.");
       return res.redirect("/votings/new");
     }
 
-    const setArr = new Set(vote_content);
+    const setArr = new Set(voteContent);
 
-    if (vote_content.length !== setArr.size) {
+    if (voteContent.length !== setArr.size) {
       req.flash("message", "내용이 중복되면 안됩니다.");
       return res.redirect("/votings/new");
     }
 
-    const voteOptions = [];
-    const creator = req.session.user.user_email;
-    const expirationDate = new Date(vote_expiration_date).toISOString();
+    const voteOptionList = [];
+    const creator = req.session.user.userEmail;
+    const expirationDate = new Date(voteExpirationDate).toISOString();
 
-    for (const value of vote_content) {
-      voteOptions.push({ vote_content: value, voter: [] });
+    for (const value of voteContent) {
+      voteOptionList.push({ voteContent: value, voterList: [] });
     }
 
-    const user = await User.findOne({ user_email: creator }).lean();
+    const user = await User.findOne({ userEmail: creator }).lean();
     const newVote = await Vote.create({
-      vote_user: user._id,
-      vote_title: vote_title,
-      vote_options: voteOptions,
-      vote_expiration_date: expirationDate,
-      vote_completed: false,
+      voteCreator: user._id,
+      voteTitle: voteTitle,
+      voteOptionList: voteOptionList,
+      voteExpirationDate: expirationDate,
+      voteCompleted: false,
     });
 
-    await User.updateOne({ user_email: creator }, { user_votes: newVote._id });
+    await User.findOneAndUpdate(
+      { userEmail: creator },
+      { $push: { userVoteList: newVote._id }},
+    );
 
+    req.flash("message", `[ ${voteTitle} ] 투표를 생성했습니다.`);
     res.redirect("/");
   } catch (error) {
     next(error);
@@ -61,22 +70,34 @@ exports.postNewVoting = async (req, res, next) => {
 exports.getShowVoting = async (req, res, next) => {
   try {
     let isSameUser = false;
-    let flag = false;
+    let isLogin = false;
 
     if (req.session.user) {
-      flag = true;
+      isLogin = true;
+      isSameUser = true;
     }
 
-    const vote = await Vote.findOne({ _id: req.params.id });
-    const user = await User.findOne({ _id: vote.vote_user });
-    const userId = user.user_email.split("@")[0];
+    const vote = await Vote.findOne({ _id: req.params.id }).lean();
+    const user = await User.findOne({ _id: vote.voteCreator }).lean();
+    const userId = user.userEmail.split("@")[0];
 
     if (!vote) {
       next(error);
     }
 
+    if (!vote.voteCompleted) {
+      const array = [];
+
+      for (const option of vote.voteOptionList) {
+        let hash = {};
+
+        hash[option.voteContent] = option.voterList.length;
+        array.push(hash);
+      }
+    }
+
     res.render("showVoting", {
-      isLogin : flag,
+      isLogin,
       vote,
       userId,
       isSameUser,
@@ -88,25 +109,25 @@ exports.getShowVoting = async (req, res, next) => {
 
 exports.postShowVoting = async (req, res, next) => {
   try {
-    const { vote_checked } = req.body;
-    const { user_email } = req.session.user;
+    const { checkVote } = req.body;
+    const { userEmail } = req.session.user;
 
-    const vote = await Vote.findOne({ _id: req.params.id });
-    const user = await User.findOne({ _id: vote.vote_user });
-    const userId = user.user_email.split("@")[0];
-
-    let dupleChecked = false;
-
-    for (const option of vote.vote_options) {
-      if (option.voter.includes(user_email)) {
-        dupleChecked = true;
-      }
-    }
+    const vote = await Vote.findOne({ _id: req.params.id }).lean();
+    const user = await User.findOne({ _id: vote.voteCreator }).lean();
+    const userId = user.userEmail.split("@")[0];
 
     let isSameUser = false;
 
-    if (user_email === user.user_email) {
+    if (userEmail === user.userEmail) {
       isSameUser = true;
+    }
+
+    let dupleChecked = false;
+
+    for (const option of vote.voteOptionList) {
+      if (option.voterList.includes(userEmail)) {
+        dupleChecked = true;
+      }
     }
 
     if (dupleChecked) {
@@ -124,16 +145,17 @@ exports.postShowVoting = async (req, res, next) => {
       });
     }
 
-    for (const option of vote.vote_options) {
-      if (option.vote_content === vote_checked) {
-        option.voter.push(user_email);
-        vote.save();
-      }
-    }
+    const option = vote.voteOptionList.filter(item => item.voteContent === checkVote);
+
+    const updateVote = await Vote.findOneAndUpdate(
+      { _id: req.params.id, voteOptionList:{ $elemMatch: { _id: option[0]._id }} },
+      { $push: {"voteOptionList.$.voterList": `${userEmail}`} },
+      { new: true },
+    );
 
     res.render("showVoting", {
       isLogin : true,
-      vote,
+      vote: updateVote,
       userId,
       isSameUser,
     });
@@ -144,45 +166,39 @@ exports.postShowVoting = async (req, res, next) => {
 
 exports.getMyVoting = async (req, res, next) => {
   try {
-    const { user_email } = req.session.user;
-    const user = await User.findOne({ user_email: user_email }).lean();
-    const votes = await Vote.find({ "_id": { $in: user.user_votes }});
-    const voteList = [];
+    const { userEmail } = req.session.user;
+    const user = await User.findOne({ userEmail: userEmail }).lean();
+    const votes = await Vote.find({ "_id": { $in: user.userVoteList }}).lean();
+    let voteList = [];
 
     for (const data of votes) {
-      const user = await User.findOne({ _id: data.vote_user });
+      const user = await User.findOne({ _id: data.voteCreator }).lean();
 
       if (!user) {
         return res.render("index", {
-          isLogin : true,
-          voteList,
+          isLogin,
+          votes,
         });
       }
 
-      const result = checkTime(data.vote_expiration_date);
+      const result = checkExpirationTime(data.voteExpirationDate);
 
       if (!result) {
         await Vote.findOneAndUpdate(
           { _id: data._id },
-          { vote_completed: true },
-        );
+          { voteCompleted: true },
+        ).lean();
       }
 
-      const userId = user.user_email.split("@")[0];
-      const formatDate = data.vote_expiration_date.toISOString().split("T")[0];
-
-      voteList.push({
-        _id: data._id,
-        vote_title: data.vote_title,
-        vote_completed: result ? data.vote_completed : true,
-        vote_user: userId,
-        vote_expiration_date: formatDate,
-      });
+      const vote = Object.assign(data, { userEmail: user.userEmail });
+      voteList.push(vote);
     }
 
-    voteList.reverse();
-
-    res.render("myVoting", { isLogin : true, voteList });
+    res.render("myVoting", {
+      isLogin : true,
+      votes,
+      userEmail: user.userEmail,
+    });
   } catch (error) {
     next(error);
   }
@@ -190,9 +206,22 @@ exports.getMyVoting = async (req, res, next) => {
 
 exports.deleteVoting = async (req, res, next) => {
   try {
-    const deleteVote = await Vote.findOneAndDelete({ _id: req.params.id });
+    if (!req.params.id) {
+      req.flash("message", "삭제할 투표가 없습니다.");
+      return res.redirect("/");
+    }
 
-    req.flash("message", `[ ${deleteVote.vote_title} ] 투표를 삭제했습니다.`);
+    const deleteVote = await Vote.findOneAndDelete(
+      { _id: req.params.id },
+      { new: true },
+    );
+
+    await User.findOneAndUpdate(
+      { userEmail: req.session.user.userEmail },
+      { $pull: { userVoteList: deleteVote._id }},
+    );
+
+    req.flash("message", `[ ${deleteVote.voteTitle} ] 투표를 삭제했습니다.`);
     res.redirect("/");
   } catch (error) {
     next(error);

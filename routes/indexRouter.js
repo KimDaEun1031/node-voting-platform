@@ -3,7 +3,6 @@ const router = express.Router();
 
 const { getAllVoteList } = require("../controllers/defaultsController");
 const { getMyVoting } = require("../controllers/voteController");
-
 const {
   getLogin,
   getSignUp,
@@ -13,7 +12,6 @@ const {
 } = require("../controllers/signController");
 
 const { isLogin } = require('../middleware/authentication');
-
 const {
   validateSignUpForm,
   validateLoginForm,
@@ -27,7 +25,7 @@ router.post('/login', validateLoginForm, postLogin);
 router.get('/signup', getSignUp);
 router.post('/signup', validateSignUpForm, postSignUp);
 
-router.get('/logout', getLogout);
+router.get('/logout', isLogin, getLogout);
 
 router.get('/my-votings', isLogin, getMyVoting);
 

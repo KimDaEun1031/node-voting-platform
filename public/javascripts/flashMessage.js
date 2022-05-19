@@ -1,5 +1,5 @@
-const flashBox = document.querySelector(".flash-message");
-const message = document.querySelector(".flash-message .message");
+const flashBox = document.querySelector(".flashMessage");
+const message = document.querySelector(".flashMessage .message");
 
 setTimeout(() => {
   message.classList.add("remove");

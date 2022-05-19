@@ -5,52 +5,59 @@
       <div class="title">
         <input
         type="text"
-        name="vote_title"
-        class="vote-title"
-        value="<%= vote.vote_title %>"
+        name="voteTitle"
+        class="votePostTitle"
+        value="<%= vote.voteTitle %>"
         >
       </div>
       <p class="creator"><%= userId %></p>
       <form action="/votings/<%= vote._id %>" method="post">
-        <ul class="options">
-          <% for (const option of vote.vote_options) { %>
+        <ul class="optionList">
+          <% for (const option of vote.voteOptionList) { %>
             <li class="option">
-              <% if (!vote.vote_completed) { %>
+              <% if (!vote.voteCompleted) { %>
                 <input
                   type="radio"
-                  name="vote_checked"
-                  class="vote-checked"
-                  value="<%= option.vote_content %>"
+                  name="checkVote"
+                  class="checkVote"
+                  value="<%= option.voteContent %>"
                   required
                 >
               <% } %>
-              <span class="vote-content">
-                <%= option.vote_content %>
+              <span class="votePostContent">
+                <%= option.voteContent %>
               </span>
-              <span><%= option.voter.length %></span>
+              <span><%= option.voterList.length %></span>
             </li>
           <% } %>
         </ul>
-        <% if (!vote.vote_completed) { %>
-          <button type="submit" class="submit-btn">제출</button>
+        <% if (!vote.voteCompleted) { %>
+          <button type="submit" class="submitBtn">제출</button>
         <% } %>
       </form>
-      <div class="expiration-date">
+      <div class="expirationDate">
         <%
-          const expirationDate = vote.vote_expiration_date.toISOString().substring(0, 16);
+          const expirationDate = vote.voteExpirationDate.toISOString().substring(0, 16);
         %>
         <input
           type="datetime-local"
-          name="vote_expiration_date"
-          class="vote-expiration-date"
+          name="voteExpirationDate"
+          class="votePostExpirationDate"
           value="<%= expirationDate %>"
           readonly
         >
       </div>
     </div>
+    <div class="resultContainer">
+      <%
+        if (!vote.voteCompleted) {
+      %>
+        <div class="voteResult"><%= max %></div>
+      <% } %>
+    </div>
     <button
       type="button"
-      class="back-btn"
+      class="backBtn"
       onclick="location.href='/'"
     >
       취소
@@ -60,7 +67,7 @@
     %>
       <button
         type="submit"
-        class="back-btn"
+        class="removeBtn"
         onclick="location.href='/votings/delete/<%= vote._id %>'"
       >
         삭제

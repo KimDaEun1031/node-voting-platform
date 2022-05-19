@@ -9,16 +9,14 @@ const {
   deleteVoting,
 } = require("../controllers/voteController");
 
-const {
-  isLogin,
-} = require('../middleware/authentication');
+const { isLogin } = require('../middleware/authentication');
 
 router.get('/new', isLogin, getNewVoting);
 router.post('/new', isLogin, postNewVoting);
 
 router.get('/:id', getShowVoting);
-router.post('/:id',isLogin, postShowVoting);
+router.post('/:id', isLogin, postShowVoting);
 
-router.get('/delete/:id', deleteVoting);
+router.get('/delete/:id', isLogin, deleteVoting);
 
 module.exports = router;

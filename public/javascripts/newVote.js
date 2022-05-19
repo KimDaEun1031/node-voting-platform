@@ -1,49 +1,49 @@
-const options = document.querySelector(".options");
-const deleteBtn = document.querySelectorAll(".delete-btn");
-const optionBtn = document.querySelector(".option-btn");
+const optionList = document.querySelector(".optionList");
+const deleteBtn = document.querySelectorAll(".deleteBtn");
+const optionAddBtn = document.querySelector(".optionAddBtn");
 
 const createOption = () => {
   const option = document.createElement("li");
-  const voter = document.createElement("input");
+  const radioBtn = document.createElement("input");
   const voteContent = document.createElement("input");
-  const delBtn = document.createElement("button");
+  const deleteBtn = document.createElement("button");
 
-  voter.setAttribute("type", "radio");
-  voter.setAttribute("name", "voter");
-  voter.setAttribute("value", "");
+  radioBtn.setAttribute("type", "radio");
   voteContent.setAttribute("type", "text");
-  voteContent.setAttribute("name", "vote_content");
+  voteContent.setAttribute("name", "voteContent");
   voteContent.setAttribute("value", "option");
-  delBtn.setAttribute("type", "button");
+  voteContent.setAttribute("required", "");
+  deleteBtn.setAttribute("type", "button");
 
   option.classList.add("option");
-  voter.classList.add("voter");
-  voteContent.classList.add("vote-content");
-  delBtn.classList.add("delete-btn");
+  radioBtn.classList.add("radioBtn");
+  voteContent.classList.add("votePostContent");
+  deleteBtn.classList.add("deleteBtn");
 
-  delBtn.textContent = "✘";
+  deleteBtn.textContent = "✘";
 
-  option.appendChild(voter);
+  option.appendChild(radioBtn);
   option.appendChild(voteContent);
-  option.appendChild(delBtn);
+  option.appendChild(deleteBtn);
 
-  options.appendChild(option);
+  optionList.appendChild(option);
+
   deleteBtn.forEach(item => item.addEventListener("click", removeOption));
-  delBtn.addEventListener("click", removeOption);
+  deleteBtn.addEventListener("click", removeOption);
 }
 
 const removeOption = (event) => {
   const target = event.target;
   const parentTarget = target.parentNode;
 
-  if (options.children.length >= 3) {
-    options.removeChild(parentTarget);
+  if (optionList.children.length >= 3) {
+    optionList.removeChild(parentTarget);
   }
 }
 
-optionBtn.addEventListener("click", createOption);
+optionAddBtn.addEventListener("click", createOption);
 
-const date = document.querySelector(".vote-expiration-date");
+const expirationDate = document.querySelector(".votePostExpirationDate");
 const currentDate = new Date().toISOString().substring(0, 16);
 
-date.setAttribute("min", currentDate);
+expirationDate.setAttribute("min", currentDate);

@@ -1,4 +1,4 @@
-exports.checkTime = (date) => {
+exports.checkExpirationTime = (date) => {
   const expirationTime = new Date(date).getTime();
   const currentTime = new Date().getTime();
 

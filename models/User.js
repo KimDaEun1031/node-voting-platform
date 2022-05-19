@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
-    user_email: {
+    userEmail: {
       type: String,
       trim: true,
       required: true,
@@ -12,12 +12,12 @@ const userSchema = new mongoose.Schema(
       index: true,
       match: [/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g, "Please fill a valid email address"],
     },
-    user_password: {
+    userPassword: {
       type: String,
       required: true,
       match: [/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, "Please fill a valid password"],
     },
-    user_votes: [{
+    userVoteList: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Vote',
     }]
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function () {
-  this.user_password = await bcrypt.hash(this.user_password, 5);
+  this.userPassword = await bcrypt.hash(this.userPassword, 5);
 });
 
 module.exports = mongoose.model("User", userSchema);

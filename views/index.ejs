@@ -1,20 +1,24 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/index.css">
+  <% votes.reverse() %>
   <article>
-    <% if (voteList.length === 0) { %>
+    <% if (votes.length === 0) { %>
       <h2>등록된 게시물이 없습니다.</h2>
     <% } else { %>
       <ul>
-        <% for (const data of voteList) { %>
+        <% for (const key in votes) {
+            const creator = votes[key].userEmail.split("@")[0];
+            const expirationDate = votes[key].voteExpirationDate.toISOString().split("T")[0];
+        %>
           <li>
-            <button onclick="location.href='/votings/<%= data._id %>'">
-              <div class="vote-header">
-                <h4 class="vote-title"><%= data.vote_title %> </h4>
-                <span class="vote-completed"><%= data.vote_completed ? "완료" : "진행 중" %></span>
+            <button onclick="location.href='/votings/<%= votes[key]._id %>'">
+              <div class="votePostHeader">
+                <h4 class="votePostTitle"><%= votes[key].voteTitle %> </h4>
+                <span class="votePostCompleted"><%= votes[key].voteCompleted ? "완료" : "진행 중" %></span>
               </div>
-              <div class="vote-content">
-                <span class="vote-creator"><%= data.vote_user %> </span>
-                <span class="vote-expiration-date"><%= data.vote_expiration_date %></span>
+              <div class="votePostContent">
+                <span class="votePostCreator"><%= creator %> </span>
+                <span class="votePostExpirationDate"><%= expirationDate %></span>
               </div>
             </button>
           </li>

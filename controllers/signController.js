@@ -11,16 +11,17 @@ exports.getSignUp = (req, res, next) => {
 exports.postSignUp = async (req, res, next) => {
   try {
     const {
-      user_email,
-      user_password,
+      userEmail,
+      userPassword,
     } = req.body;
 
     await User.create({
-      user_email: user_email,
-      user_password: user_password,
-      user_votes: [],
+      userEmail: userEmail,
+      userPassword: userPassword,
+      userVoteList: [],
     });
 
+    req.flash("message", "회원가입에 성공했습니다.");
     return res.redirect("/login");
   } catch (error) {
     next(error);
@@ -30,7 +31,7 @@ exports.postSignUp = async (req, res, next) => {
 exports.getLogin = (req, res, next) => {
   try {
     req.session.url = {
-      check: req.headers.referer.substring(30),
+      urlCheck: req.headers.referer.substring(30),
       originUrl: req.headers.referer
     };
 
@@ -42,18 +43,17 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
   try {
-    req.session.user = { user_email: req.body.user_email };
+    req.session.user = { userEmail: req.body.userEmail };
     req.flash("message", "로그인에 성공했습니다!");
 
-    const { check, originUrl } = req.session.url;
+    const { urlCheck, originUrl } = req.session.url;
 
-    if (check.length === 24) {
+    if (urlCheck.length === 24) {
       return res.redirect(originUrl);
     }
 
     res.redirect("/");
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

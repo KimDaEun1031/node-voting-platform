@@ -1,62 +1,52 @@
 const Vote = require("../models/Vote");
 const User = require("../models/User");
 
-const { checkTime } = require("../public/javascripts/validationDate");
+const { checkExpirationTime } = require("../public/javascripts/validationDate");
 
 exports.getAllVoteList = async (req, res, next) => {
   try {
-    let flag = false;
+    let isLogin = false;
 
     if (req.session.user) {
-      flag = true;
+      isLogin = true;
     }
 
     const votes = await Vote.find().lean();
-    const voteList = [];
+    let voteList = [];
 
     if (!votes) {
       return res.render("index", {
-        isLogin : flag,
-        voteList,
+        isLogin,
+        votes,
       });
     }
 
     for (const data of votes) {
-      const user = await User.findOne({ _id: data.vote_user });
+      const user = await User.findOne({ _id: data.voteCreator }).lean();
 
       if (!user) {
         return res.render("index", {
-          isLogin : flag,
-          voteList,
+          isLogin,
+          votes,
         });
       }
 
-      const result = checkTime(data.vote_expiration_date);
+      const result = checkExpirationTime(data.voteExpirationDate);
 
       if (!result) {
         await Vote.findOneAndUpdate(
           { _id: data._id },
-          { vote_completed: true },
-        );
+          { voteCompleted: true },
+        ).lean();
       }
 
-      const userId = user.user_email.split("@")[0];
-      const formatDate = data.vote_expiration_date.toISOString().split("T")[0];
-
-      voteList.push({
-        _id: data._id,
-        vote_title: data.vote_title,
-        vote_completed: result ? data.vote_completed : true,
-        vote_user: userId,
-        vote_expiration_date: formatDate,
-      });
+      const vote = Object.assign(data, { userEmail: user.userEmail });
+      voteList.push(vote);
     }
 
-    voteList.reverse();
-
     res.render("index", {
-      isLogin : flag,
-      voteList,
+      isLogin,
+      votes: voteList,
     });
   } catch (error) {
     next(error);

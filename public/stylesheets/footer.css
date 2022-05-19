@@ -2,14 +2,14 @@ body {
   position: relative;
 }
 
-.flash-message {
+.flashMessage {
   position: absolute;
   width: 100%;
   top: 320px;
   left: 20%;
 }
 
-.flash-message .message {
+.flashMessage .message {
   width: 60%;
   padding: 50px 0;
   border-radius: 10px;
@@ -17,7 +17,7 @@ body {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.315);
 }
 
-.flash-message .remove {
+.flashMessage .remove {
   visibility: visible;
   transform-origin: top center;
   opacity: 0;

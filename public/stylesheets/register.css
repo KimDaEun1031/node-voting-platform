@@ -11,28 +11,28 @@ article form {
   border-radius: 10px;
 }
 
-article .signup-form {
+article .signupForm {
   height: 17%;
 }
 
-article form .user-email,
-article form .user-pw,
-article form .user-pw-check {
+article form .userEmail,
+article form .userPassword,
+article form .userPasswordCheck {
   margin: 10px;
   border-radius: 10px;
   background-color: rgba(138, 71, 201, 0.229);
 }
 
-article form .user-email .email-input,
-article form .user-pw .pw-input,
-article form .user-pw-check .pw-check-input {
+article form .userEmail .emailInput,
+article form .userPassword .passwordInput,
+article form .userPasswordCheck .passwordCheckInput {
   width: 80%;
   height: 25px;
   font-size: 16px;
   background-color: transparent;
 }
 
-article form .submit-btn {
+article form .submitBtn {
   margin-top: 5px;
   padding: 5px 10px;
   border-radius: 5px;

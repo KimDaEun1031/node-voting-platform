@@ -99,17 +99,17 @@ header .logo img {
   margin: 10px;
 }
 
-header .button-group {
+header .headerBtnGroup {
   display: flex;
 
 }
 
-header .button-group button {
+header .headerBtnGroup button {
   margin: 10px;
 }
 
-header .button-group .login .login-btn,
-header .button-group .signup .signup-btn {
+header .headerBtnGroup .login .logtinBtn,
+header .headerBtnGroup .signup .signupBtn {
   padding: 5px 10px;
   border-radius: 5px;
   color: white;

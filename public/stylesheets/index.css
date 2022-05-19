@@ -32,7 +32,7 @@ article ul li button {
   cursor: pointer;
 }
 
-article ul li button .vote-header {
+article ul li button .votePostHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -40,12 +40,12 @@ article ul li button .vote-header {
   height: 30px;
 }
 
-article ul li button .vote-header .vote-title {
+article ul li button .votePostHeader .votePostTitle {
   font-size: 30px;
   font-family: 'NelnaLizzyChae';
 }
 
-article ul li button .vote-header .vote-completed {
+article ul li button .votePostHeader .votePostCompleted {
   padding: 2px 7px 1px 7px;
   font-size: 12px;
   font-weight: 500;
@@ -55,38 +55,38 @@ article ul li button .vote-header .vote-completed {
   background-color: rgb(138, 71, 201);
 }
 
-article ul li button .vote-content {
+article ul li button .votePostContent {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   height: 40px;
 }
 
-article ul li button .vote-content .vote-creator {
+article ul li button .votePostContent .votePostCreator {
   padding: 3px 2px 2px 3px;
   border: 2px rgba(138, 71, 201, 0.386);
   border-radius: 0 10px 0 0;
   border-style: dashed dashed none none;
 }
 
-article ul li button .vote-content .vote-expiration-date {
+article ul li button .votePostContent .votePostExpirationDate {
   padding: 3px 2px 2px 3px;
   border: 2px rgba(138, 71, 201, 0.386);
   border-radius: 10px 0 10px 0;
   border-style: dashed none none dashed;
 }
 
-article .button-group {
+article .headerBtnGroup {
   margin-bottom: 30px;
 }
 
-article .button-group ul {
+article .headerBtnGroup ul {
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
 }
 
-article .button-group ul li {
+article .headerBtnGroup ul li {
   width: 150px;
   height: 100%;
   border: none;
@@ -94,7 +94,7 @@ article .button-group ul li {
   border-bottom: 5px solid rgb(138, 71, 201);
 }
 
-article .button-group ul li button {
+article .headerBtnGroup ul li button {
   border-radius: 0;
 
 }

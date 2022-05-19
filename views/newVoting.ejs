@@ -6,55 +6,55 @@
         <div class="title">
           <input
             type="text"
-            name="vote_title"
-            class="vote-title"
+            name="voteTitle"
+            class="votePostTitle"
             value="제목 없는 설문지"
             required
           >
         </div>
-        <ul class="options">
+        <ul class="optionList">
           <li class="option">
             <input
               type="radio"
-              name="voter"
-              class="voter"
+              class="radioBtn"
             >
             <input
               type="text"
-              name="vote_content"
-              class="vote-content"
+              name="voteContent"
+              class="votePostContent"
               value="option"
+              required
             >
-            <button type="button" class="delete-btn">✘</button>
+            <button type="button" class="deleteBtn">✘</button>
           </li>
           <li class="option">
             <input
               type="radio"
-              name="voter"
-              class="voter"
+              class="radioBtn"
             >
             <input
               type="text"
-              name="vote_content"
-              class="vote-content"
+              name="voteContent"
+              class="votePostContent"
               value="option"
+              required
             >
-            <button type="button" class="delete-btn">✘</button>
+            <button type="button" class="deleteBtn">✘</button>
           </li>
         </ul>
-        <button type="button" class="option-btn">옵션 추가</button>
-        <div class="expiration-date">
+        <button type="button" class="optionAddBtn">옵션 추가</button>
+        <div class="expirationDate">
           <input
             type="datetime-local"
-            name="vote_expiration_date"
-            class="vote-expiration-date"
+            name="voteExpirationDate"
+            class="votePostExpirationDate"
             required
           >
         </div>
-        <button type="submit" class="submit-btn">제출</button>
+        <button type="submit" class="submitBtn">제출</button>
       </div>
     </form>
-    <button class="home-btn" onclick="location.href='/'">Home</button>
+    <button class="homeBtn" onclick="location.href='/'">Home</button>
   </article>
   <script src="/public/javascripts/newVote.js"></script>
 <%-include("./includes/footer.ejs") %>

@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const voteOptionsSchema = new mongoose.Schema(
+const voteOptionListSchema = new mongoose.Schema(
   {
-    vote_content: {
+    voteContent: {
       type: String,
       required: true,
       default: "",
     },
-    voter: [
+    voterList: [
       {
         type: String,
       }
@@ -17,23 +17,23 @@ const voteOptionsSchema = new mongoose.Schema(
 
 const voteSchema = new mongoose.Schema(
   {
-    vote_user: {
+    voteCreator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    vote_title: {
+    voteTitle: {
       type: String,
       required: true,
     },
-    vote_options: [voteOptionsSchema],
-    vote_expiration_date: {
+    voteOptionList: [voteOptionListSchema],
+    voteExpirationDate: {
       type: Date,
       required: true,
       min: Date.now(),
       default: Date.now(),
     },
-    vote_completed: {
+    voteCompleted: {
       type: Boolean,
       default: false,
     }
