@@ -1,11 +1,16 @@
 const Vote = require("../models/Vote");
 const User = require("../models/User");
 
-const { checkExpirationTime, validationDate } = require("../public/javascripts/validationDate");
+const { resultToVote, checkExpirationTime, validationDate } = require("../public/javascripts/utill");
 
 exports.getNewVoting = (req, res, next) => {
   try {
-    res.render("newVoting", { isLogin : true });
+    const userId = req.session.user.userEmail;
+
+    res.render("newVoting", {
+      isLogin : true,
+      userId,
+    });
   } catch (error) {
     next(error);
   }
@@ -71,36 +76,34 @@ exports.getShowVoting = async (req, res, next) => {
   try {
     let isSameUser = false;
     let isLogin = false;
+    let userId = "";
 
     if (req.session.user) {
       isLogin = true;
-      isSameUser = true;
+      userId = req.session.user.userEmail;
     }
 
     const vote = await Vote.findOne({ _id: req.params.id }).lean();
     const user = await User.findOne({ _id: vote.voteCreator }).lean();
-    const userId = user.userEmail.split("@")[0];
+    const creator = user.userEmail.split("@")[0];
+
+    if (userId === user.userEmail) {
+      isSameUser = true;
+    }
 
     if (!vote) {
       next(error);
     }
 
-    if (!vote.voteCompleted) {
-      const array = [];
-
-      for (const option of vote.voteOptionList) {
-        let hash = {};
-
-        hash[option.voteContent] = option.voterList.length;
-        array.push(hash);
-      }
-    }
+    const result = resultToVote(vote, isSameUser);
 
     res.render("showVoting", {
       isLogin,
       vote,
+      creator,
       userId,
       isSameUser,
+      result,
     });
   } catch (error) {
     next(error);
@@ -114,7 +117,7 @@ exports.postShowVoting = async (req, res, next) => {
 
     const vote = await Vote.findOne({ _id: req.params.id }).lean();
     const user = await User.findOne({ _id: vote.voteCreator }).lean();
-    const userId = user.userEmail.split("@")[0];
+    const creator = user.userEmail.split("@")[0];
 
     let isSameUser = false;
 
@@ -130,6 +133,8 @@ exports.postShowVoting = async (req, res, next) => {
       }
     }
 
+    const result = resultToVote(vote, isSameUser);
+
     if (dupleChecked) {
       req.flash("message", "중복 투표를 할 수 없습니다!");
       const sendMessage = req.flash("message");
@@ -137,8 +142,10 @@ exports.postShowVoting = async (req, res, next) => {
       return res.render("showVoting", {
         isLogin : true,
         vote,
-        userId,
+        creator,
+        userId: userEmail,
         isSameUser,
+        result,
         flashMessage: {
           message: sendMessage,
         },
@@ -156,8 +163,10 @@ exports.postShowVoting = async (req, res, next) => {
     res.render("showVoting", {
       isLogin : true,
       vote: updateVote,
-      userId,
+      userId: userEmail,
       isSameUser,
+      result,
+      creator,
     });
   } catch (error) {
     next(error);
@@ -197,7 +206,7 @@ exports.getMyVoting = async (req, res, next) => {
     res.render("myVoting", {
       isLogin : true,
       votes,
-      userEmail: user.userEmail,
+      userId: userEmail,
     });
   } catch (error) {
     next(error);

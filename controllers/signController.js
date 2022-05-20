@@ -2,7 +2,16 @@ const User = require("../models/User");
 
 exports.getSignUp = (req, res, next) => {
   try {
-    res.render("signup", { isLogin : false });
+    let userId = "";
+
+    if (req.session.user) {
+      userId = req.session.user.userEmail;
+    }
+
+    res.render("signup", {
+      isLogin : false,
+      userId,
+    });
   } catch (error) {
     next(error);
   }
@@ -22,7 +31,7 @@ exports.postSignUp = async (req, res, next) => {
     });
 
     req.flash("message", "회원가입에 성공했습니다.");
-    return res.redirect("/login");
+    res.redirect("/login");
   } catch (error) {
     next(error);
   }
@@ -30,12 +39,21 @@ exports.postSignUp = async (req, res, next) => {
 
 exports.getLogin = (req, res, next) => {
   try {
+    let userId = "";
+
+    if (req.session.user) {
+      userId = req.session.user.userEmail;
+    }
+
     req.session.url = {
       urlCheck: req.headers.referer.substring(30),
       originUrl: req.headers.referer
     };
 
-    res.render("login", { isLogin : false });
+    res.render("login", {
+      isLogin : false,
+      userId,
+    });
   } catch (error) {
     next(error);
   }

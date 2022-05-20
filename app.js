@@ -14,7 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(session({
-  secret: 'secret',
+  secret: "secret",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -47,7 +47,11 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
-  res.render("error", { err });
+  res.render("error", {
+    isLogin: false,
+    err,
+    userId: "",
+  });
 });
 
 module.exports = app;

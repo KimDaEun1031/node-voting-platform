@@ -1,6 +1,5 @@
-
+<%-include("./includes/header.ejs") %>
   <article>
-    <h1><%= err %></h1>
-    <pre><%= err.stack %></pre>
+    <h1>[<%= err.status %>] <%= err.message  %></h1>
   </article>
-
+<%-include("./includes/footer.ejs") %>

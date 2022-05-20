@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@font-face {
+  font-family: "NelnaLizzyChae";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/NelnaLizzyChae.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -39,7 +47,7 @@ blockquote, q {
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -82,7 +90,7 @@ input {
 
 header {
   width: 100%;
-  height: 100px;
+  height: 65px;
   position: absolute;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.263);
   background-color: rgb(255, 255, 255);
@@ -94,14 +102,22 @@ header .header {
   align-items: center;
 }
 
-header .logo img {
-  height: 50px;
+header .logo a {
+  display: flex;
+  align-items: center;
+  font-family: "Pacifico", cursive;
+  color: rgb(107, 63, 151);
+  font-size: 24px;
+}
+
+header .logo a img {
+  height: 40px;
   margin: 10px;
+  opacity: 0.95;
 }
 
 header .headerBtnGroup {
   display: flex;
-
 }
 
 header .headerBtnGroup button {
@@ -115,21 +131,6 @@ header .headerBtnGroup .signup .signupBtn {
   color: white;
   background-color: rgb(138, 71, 201);
   cursor: pointer;
-}
-
-header nav .menu span {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgb(138, 71, 201);
-}
-
-header nav .menu .line {
-  width: 45px;
-  height: 3px;
-  margin-top: 7px;
-  border-radius: 5px 5px 0 0;
-  background-color: rgb(138, 71, 201);
-
 }
 
 article {

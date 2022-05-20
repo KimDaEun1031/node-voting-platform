@@ -1,9 +1,10 @@
 const optionList = document.querySelector(".optionList");
-const deleteBtn = document.querySelectorAll(".deleteBtn");
+const deleteAllBtn = document.querySelectorAll(".deleteBtn");
 const optionAddBtn = document.querySelector(".optionAddBtn");
 
 const createOption = () => {
   const option = document.createElement("li");
+  const optionContent = document.createElement("div");
   const radioBtn = document.createElement("input");
   const voteContent = document.createElement("input");
   const deleteBtn = document.createElement("button");
@@ -16,19 +17,23 @@ const createOption = () => {
   deleteBtn.setAttribute("type", "button");
 
   option.classList.add("option");
-  radioBtn.classList.add("radioBtn");
+  radioBtn.classList.add("newRadioBtn");
   voteContent.classList.add("votePostContent");
   deleteBtn.classList.add("deleteBtn");
+  optionContent.classList.add("optionContent");
 
   deleteBtn.textContent = "✘";
 
-  option.appendChild(radioBtn);
-  option.appendChild(voteContent);
+  optionContent.appendChild(radioBtn);
+  optionContent.appendChild(voteContent);
+  option.appendChild(optionContent);
   option.appendChild(deleteBtn);
 
-  optionList.appendChild(option);
+  if (optionList.children.length <= 10) {
+    optionList.appendChild(option);
+  }
 
-  deleteBtn.forEach(item => item.addEventListener("click", removeOption));
+  deleteAllBtn.forEach(item => item.addEventListener("click", removeOption));
   deleteBtn.addEventListener("click", removeOption);
 }
 

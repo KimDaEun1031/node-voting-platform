@@ -15,6 +15,7 @@
       <div class="logo">
         <a href="/">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Google_Forms_2020_Logo.svg/1489px-Google_Forms_2020_Logo.svg.png" alt="logo">
+          <span>Let's Voting!</span>
         </a>
       </div>
       <div class="headerBtnGroup">
@@ -23,7 +24,8 @@
             <button class="logoutBtn" onclick="location.href='/logout'">Logout</button>
           </div>
           <div class="myPage">
-            <button class="myPageBtn" onclick="location.href='/my-votings'">Mypage</button>
+            <% const user = userId.split("@")[0] %>
+            <button class="myPageBtn" onclick="location.href='/my-votings'"><%= user %>'s Mypage</button>
           </div>
           <div class="newVote">
             <button class="newVoteBtn" onclick="location.href='/votings/new'">Create</button>
@@ -38,10 +40,4 @@
         <% } %>
       </div>
     </div>
-    <!-- <nav>
-      <div class="menu">
-        <span>질문</span>
-        <div class="line"></div>
-      </div>
-    </nav> -->
   </header>

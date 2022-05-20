@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     },
     userVoteList: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Vote',
+      ref: "Vote",
     }]
   }
 );

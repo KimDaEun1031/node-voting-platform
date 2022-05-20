@@ -1,14 +1,16 @@
 const Vote = require("../models/Vote");
 const User = require("../models/User");
 
-const { checkExpirationTime } = require("../public/javascripts/validationDate");
+const { checkExpirationTime } = require("../public/javascripts/utill");
 
 exports.getAllVoteList = async (req, res, next) => {
   try {
     let isLogin = false;
+    let userId = "";
 
     if (req.session.user) {
       isLogin = true;
+      userId = req.session.user.userEmail;
     }
 
     const votes = await Vote.find().lean();
@@ -23,14 +25,6 @@ exports.getAllVoteList = async (req, res, next) => {
 
     for (const data of votes) {
       const user = await User.findOne({ _id: data.voteCreator }).lean();
-
-      if (!user) {
-        return res.render("index", {
-          isLogin,
-          votes,
-        });
-      }
-
       const result = checkExpirationTime(data.voteExpirationDate);
 
       if (!result) {
@@ -47,6 +41,7 @@ exports.getAllVoteList = async (req, res, next) => {
     res.render("index", {
       isLogin,
       votes: voteList,
+      userId,
     });
   } catch (error) {
     next(error);

@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const { getAllVoteList } = require("../controllers/defaultsController");
@@ -11,22 +11,22 @@ const {
   getLogout,
 } = require("../controllers/signController");
 
-const { isLogin } = require('../middleware/authentication');
+const { isLogin } = require("../middleware/authentication");
 const {
   validateSignUpForm,
   validateLoginForm,
-} = require('../middleware/validation');
+} = require("../middleware/validation");
 
-router.get('/', getAllVoteList);
+router.get("/", getAllVoteList);
 
-router.get('/login', getLogin);
-router.post('/login', validateLoginForm, postLogin);
+router.get("/login", getLogin);
+router.post("/login", validateLoginForm, postLogin);
 
-router.get('/signup', getSignUp);
-router.post('/signup', validateSignUpForm, postSignUp);
+router.get("/signup", getSignUp);
+router.post("/signup", validateSignUpForm, postSignUp);
 
-router.get('/logout', isLogin, getLogout);
+router.get("/logout", isLogin, getLogout);
 
-router.get('/my-votings', isLogin, getMyVoting);
+router.get("/my-votings", isLogin, getMyVoting);
 
 module.exports = router;

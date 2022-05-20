@@ -1,20 +1,7 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/index.css">
+  <% votes.reverse() %>
   <article>
-    <% votes.reverse() %>
-    <div class="headerBtnGroup">
-      <ul>
-        <li>
-          <button>전체 투표</button>
-        </li>
-        <li>
-          <button>진행 중인 투표</button>
-        </li>
-        <li>
-          <button>만료된 투표</button>
-        </li>
-      </ul>
-    </div>
     <% if (votes.length === 0) { %>
       <h2>등록된 게시물이 없습니다.</h2>
     <% } else { %>

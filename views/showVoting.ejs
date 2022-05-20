@@ -1,58 +1,63 @@
 <%-include("./includes/header.ejs") %>
-  <link rel="stylesheet" href="/public/stylesheets/newVoting.css">
+  <link rel="stylesheet" href="/public/stylesheets/showVoting.css">
   <article>
     <div class="vote">
-      <div class="title">
-        <input
-        type="text"
-        name="voteTitle"
-        class="votePostTitle"
-        value="<%= vote.voteTitle %>"
-        >
+      <div class="showVoteHeader">
+        <div class="line"></div>
+        <p class="votePostTitle"><%= vote.voteTitle %></p>
+        <p class="creator"><%= creator %></p>
       </div>
-      <p class="creator"><%= userId %></p>
       <form action="/votings/<%= vote._id %>" method="post">
-        <ul class="optionList">
-          <% for (const option of vote.voteOptionList) { %>
-            <li class="option">
-              <% if (!vote.voteCompleted) { %>
-                <input
-                  type="radio"
-                  name="checkVote"
-                  class="checkVote"
-                  value="<%= option.voteContent %>"
-                  required
-                >
-              <% } %>
-              <span class="votePostContent">
-                <%= option.voteContent %>
-              </span>
-              <span><%= option.voterList.length %></span>
-            </li>
-          <% } %>
-        </ul>
+        <div class="formContainer">
+          <div class="line"></div>
+          <ul class="optionList">
+            <% for (const option of vote.voteOptionList) { %>
+              <li class="option">
+                <div class="optionContent">
+                  <% if (!vote.voteCompleted) { %>
+                    <input
+                      type="radio"
+                      name="checkVote"
+                      class="checkVote"
+                      value="<%= option.voteContent %>"
+                      required
+                    >
+                  <% } %>
+                  <span class="votePostContent">
+                    <%= option.voteContent %>
+                  </span>
+                </div>
+                <span class="voteCount">
+                  <%= option.voterList.length %>
+                </span>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="expirationDate">
+          <%
+            const expirationDate = vote.voteExpirationDate.toISOString().substring(0, 16);
+          %>
+          <input
+            type="datetime-local"
+            name="voteExpirationDate"
+            class="votePostExpirationDate"
+            value="<%= expirationDate %>"
+            readonly
+          >
+        </div>
         <% if (!vote.voteCompleted) { %>
           <button type="submit" class="submitBtn">제출</button>
         <% } %>
       </form>
-      <div class="expirationDate">
-        <%
-          const expirationDate = vote.voteExpirationDate.toISOString().substring(0, 16);
-        %>
-        <input
-          type="datetime-local"
-          name="voteExpirationDate"
-          class="votePostExpirationDate"
-          value="<%= expirationDate %>"
-          readonly
-        >
-      </div>
     </div>
     <div class="resultContainer">
       <%
-        if (!vote.voteCompleted) {
+        if (vote.voteCompleted || (isSameUser && !vote.voteCompleted)) {
       %>
-        <div class="voteResult"><%= max %></div>
+        <div class="voteResult">[ <%= result[0] %> ]의 질문이 <%= result[1] %>표로 가장 많은 표를 얻었습니다.</div>
+      <% } else { %>
+        <div class="voteResult">투표가 만료되지 않아 결과를 보실 수 없습니다.</div>
       <% } %>
     </div>
     <button

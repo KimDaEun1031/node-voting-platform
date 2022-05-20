@@ -4,6 +4,7 @@
     <form action="/votings/new" method="post">
       <div class="vote">
         <div class="title">
+          <div class="line"></div>
           <input
             type="text"
             name="voteTitle"
@@ -14,47 +15,54 @@
         </div>
         <ul class="optionList">
           <li class="option">
-            <input
-              type="radio"
-              class="radioBtn"
-            >
-            <input
-              type="text"
-              name="voteContent"
-              class="votePostContent"
-              value="option"
-              required
-            >
+            <div class="optionContent">
+              <input
+                type="radio"
+                class="radioBtn"
+              >
+              <input
+                type="text"
+                name="voteContent"
+                class="votePostContent"
+                value="option"
+                required
+              >
+            </div>
             <button type="button" class="deleteBtn">✘</button>
           </li>
           <li class="option">
-            <input
-              type="radio"
-              class="radioBtn"
-            >
-            <input
-              type="text"
-              name="voteContent"
-              class="votePostContent"
-              value="option"
-              required
-            >
+            <div class="optionContent">
+              <input
+                type="radio"
+                class="radioBtn"
+              >
+              <input
+                type="text"
+                name="voteContent"
+                class="votePostContent"
+                value="option"
+                required
+              >
+            </div>
             <button type="button" class="deleteBtn">✘</button>
           </li>
         </ul>
-        <button type="button" class="optionAddBtn">옵션 추가</button>
         <div class="expirationDate">
           <input
-            type="datetime-local"
-            name="voteExpirationDate"
-            class="votePostExpirationDate"
-            required
+          type="datetime-local"
+          name="voteExpirationDate"
+          class="votePostExpirationDate"
+          required
           >
         </div>
         <button type="submit" class="submitBtn">제출</button>
+        <button type="button" class="optionAddBtn">옵션 추가</button>
       </div>
     </form>
-    <button class="homeBtn" onclick="location.href='/'">Home</button>
+    <div class="homeBtnContainer">
+      <div class="line"></div>
+      <button class="homeBtn" onclick="location.href='/'">Home</button>
+    </div>
   </article>
   <script src="/public/javascripts/newVote.js"></script>
 <%-include("./includes/footer.ejs") %>
