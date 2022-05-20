@@ -12,7 +12,7 @@ const createOption = () => {
   radioBtn.setAttribute("type", "radio");
   voteContent.setAttribute("type", "text");
   voteContent.setAttribute("name", "voteContent");
-  voteContent.setAttribute("value", "option");
+  voteContent.setAttribute("value", "투표 항목");
   voteContent.setAttribute("required", "");
   deleteBtn.setAttribute("type", "button");
 

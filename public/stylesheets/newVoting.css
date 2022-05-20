@@ -1,3 +1,11 @@
+article .pageTitle {
+  padding: 5px 0 50px 0;
+  font-size: 30px;
+  font-family: "Pacifico", cursive;
+  color: rgb(138, 71, 201);
+  text-shadow: 1px 1px 3px rgba(138, 71, 201, 0.39);
+}
+
 article form, article .homeBtnContainer {
   width: 500px;
   margin: 0 auto;
@@ -20,7 +28,8 @@ article form .vote .title .votePostTitle {
   width: 100%;
   height: 50px;
   margin-left: 10px;
-  font-size: 18px;
+  font-size: 24px;
+  font-family: 'BMJUA';
   background-color: transparent;
 }
 
@@ -50,8 +59,10 @@ article form .vote .optionList .option .optionContent .newRadioBtn {
 article form .vote .optionList .option .optionContent .votePostContent {
   width: 400px;
   height: 30px;
+  padding-left: 10px;
   border-radius: 10px;
   font-size: 16px;
+  font-family: 'BMJUA';
   background-color: rgb(247, 247, 247);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.075);
 }
@@ -67,11 +78,14 @@ article form .vote .expirationDate {
 article form .vote .expirationDate .votePostExpirationDate {
   padding: 5px;
   font-size: 16px;
+  font-family: 'BMJUA';
   background-color: transparent;
 }
 
 article form .vote .optionAddBtn, article form .vote .submitBtn {
   margin: 20px 10px;
+  font-size: 16px;
+  font-family: 'BMJUA';
 }
 
 article .homeBtnContainer .line {
@@ -83,4 +97,6 @@ article .homeBtnContainer .line {
 
 article .homeBtnContainer .homeBtn {
   margin: 10px;
+  font-size: 16px;
+  font-family: 'BMJUA';
 }

@@ -2,15 +2,33 @@
   <link rel="stylesheet" href="/public/stylesheets/register.css">
   <article>
     <form action="/login" method="post" class="loginForm">
+      <p class="pageTitle">Login</p>
       <div class="userEmail">
         <i class="fas fa-envelope"></i>
-        <input type="email" class="emailInput" name="userEmail" placeholder="email">
+        <input
+          type="email"
+          class="emailInput"
+          name="userEmail"
+          placeholder="email"
+          required
+        >
       </div>
       <div class="userPassword">
         <i class="fas fa-lock"></i>
-        <input type="password" class="passwordInput" name="userPassword" placeholder="password">
+        <input
+          type="password"
+          class="passwordInput"
+          name="userPassword"
+          placeholder="password"
+          required
+        >
       </div>
-      <button type="submit" class="submitBtn">SIGN IN</button>
+      <button
+        type="submit"
+        class="submitBtn"
+      >
+        SIGN IN
+      </button>
     </form>
   </article>
 <%-include("./includes/footer.ejs") %>

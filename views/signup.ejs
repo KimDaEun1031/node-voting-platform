@@ -2,19 +2,43 @@
 <link rel="stylesheet" href="/public/stylesheets/register.css">
 <article>
   <form action="/signup" method="post" class="signupForm">
+    <p class="pageTitle">Sign Up</p>
     <div class="userEmail">
       <i class="fas fa-envelope"></i>
-      <input type="email" class="emailInput" name="userEmail" placeholder="email" required>
+      <input
+        type="email"
+        class="emailInput"
+        name="userEmail"
+        placeholder="email"
+        required
+      >
     </div>
     <div class="userPassword">
       <i class="fas fa-lock"></i>
-      <input type="password" class="passwordInput" name="userPassword" placeholder="password" required>
+      <input
+        type="password"
+        class="passwordInput"
+        name="userPassword"
+        placeholder="password"
+        required
+      >
     </div>
     <div class="userPasswordCheck">
       <i class="fas fa-check"></i>
-      <input type="password" class="passwordCheckInput" name="userPasswordCheck" placeholder="check password" required>
+      <input
+        type="password"
+        class="passwordCheckInput"
+        name="userPasswordCheck"
+        placeholder="check password"
+        required
+      >
     </div>
-    <button type="submit" class="submitBtn">SIGN UP</button>
+    <button
+      type="submit"
+      class="submitBtn"
+    >
+      SIGN UP
+    </button>
   </form>
 </article>
 <%-include("./includes/footer.ejs") %>

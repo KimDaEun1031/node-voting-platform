@@ -1,6 +1,7 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/newVoting.css">
   <article>
+    <p class="pageTitle">Generate Vote</p>
     <form action="/votings/new" method="post">
       <div class="vote">
         <div class="title">
@@ -9,7 +10,7 @@
             type="text"
             name="voteTitle"
             class="votePostTitle"
-            value="제목 없는 설문지"
+            value="투표 주제"
             required
           >
         </div>
@@ -24,7 +25,7 @@
                 type="text"
                 name="voteContent"
                 class="votePostContent"
-                value="option"
+                value="투표 항목"
                 required
               >
             </div>
@@ -40,7 +41,7 @@
                 type="text"
                 name="voteContent"
                 class="votePostContent"
-                value="option"
+                value="투표 항목"
                 required
               >
             </div>

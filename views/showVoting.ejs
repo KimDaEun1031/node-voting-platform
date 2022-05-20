@@ -1,11 +1,16 @@
 <%-include("./includes/header.ejs") %>
   <link rel="stylesheet" href="/public/stylesheets/showVoting.css">
   <article>
+    <p class="pageTitle">Vote</p>
     <div class="vote">
       <div class="showVoteHeader">
-        <div class="line"></div>
-        <p class="votePostTitle"><%= vote.voteTitle %></p>
-        <p class="creator"><%= creator %></p>
+        <div class="line">투표 주제</div>
+        <p class="votePostTitle">
+          <%= vote.voteTitle %>
+        </p>
+        <p class="creator">
+          <%= creator %>
+        </p>
       </div>
       <form action="/votings/<%= vote._id %>" method="post">
         <div class="formContainer">
@@ -55,9 +60,13 @@
       <%
         if (vote.voteCompleted || (isSameUser && !vote.voteCompleted)) {
       %>
-        <div class="voteResult">[ <%= result[0] %> ]의 질문이 <%= result[1] %>표로 가장 많은 표를 얻었습니다.</div>
+        <div class="voteResult">
+          [ <%= result[0] %> ]의 질문이 <%= result[1] %>표로 가장 많은 표를 얻었습니다.
+        </div>
       <% } else { %>
-        <div class="voteResult">투표가 만료되지 않아 결과를 보실 수 없습니다.</div>
+        <div class="voteResult">
+          투표가 만료되지 않아 결과를 보실 수 없습니다.
+        </div>
       <% } %>
     </div>
     <button

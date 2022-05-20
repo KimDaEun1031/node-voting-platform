@@ -2,6 +2,7 @@
   <link rel="stylesheet" href="/public/stylesheets/index.css">
   <% votes.reverse() %>
   <article>
+    <p class="pageTitle">My Voting Board</p>
     <% if (votes.length === 0) { %>
       <h2>등록된 게시물이 없습니다.</h2>
     <% } else { %>
@@ -12,13 +13,23 @@
         %>
           <li>
             <button onclick="location.href='/votings/<%= votes[key]._id %>'">
+              <% if (votes[key].voteCompleted) { %>
+                <div class="votePostCompleted completed">투표 종료</div>
+              <% } else { %>
+                <div class="votePostCompleted">투표 진행 중</div>
+              <% } %>
               <div class="votePostHeader">
-                <h4 class="votePostTitle"><%= votes[key].voteTitle %> </h4>
-                <span class="votePostCompleted"><%= votes[key].voteCompleted ? "완료" : "진행 중" %></span>
+                <h4 class="votePostTitle">
+                  <%= votes[key].voteTitle %>
+                </h4>
               </div>
               <div class="votePostContent">
-                <span class="votePostCreator"><%= creator %> </span>
-                <span class="votePostExpirationDate"><%= expirationDate %></span>
+                <span class="votePostCreator">
+                  <%= creator %>
+                </span>
+                <span class="votePostExpirationDate">
+                  <%= expirationDate %>
+                </span>
               </div>
             </button>
           </li>

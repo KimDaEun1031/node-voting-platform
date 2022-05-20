@@ -1,35 +1,52 @@
+article .pageTitle {
+  padding: 5px 0 40px 0;
+  font-size: 28px;
+  font-family: "Pacifico", cursive;
+  color: rgb(138, 71, 201);
+  text-shadow: 1px 1px 3px rgba(138, 71, 201, 0.39);
+}
+
 article ul {
   display: grid;
-  padding: 2em 0 0;
-  width: 100%;
+  margin: 30px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-template-rows: 200px 200px 200px;
+  grid-auto-rows: 140px;
   column-gap: 40px;
   row-gap: 40px;
 }
 
 article ul li {
-  margin: 10px 30px;
-  border: 1px solid rgba(135, 135, 135, 0.332);
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.39);
 }
 
 article ul li button {
   width: 100%;
   height: 100%;
   padding: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   color: black;
   background-color: white;
   cursor: pointer;
 }
 
+article ul li button .votePostCompleted {
+  height: 20px;
+  padding-top: 6px;
+  border-radius: 10px 10px 0 0;
+  font-size: 16px;
+  font-family: 'BMJUA';
+  color: white;
+  background-color: rgb(118, 55, 177);
+}
+
+article ul li button .completed {
+  background-color: rgb(177, 55, 161);
+}
+
 article ul li button .votePostHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   padding: 3px 5px 5px 5px;
-  height: 90px;
+  height: 70px;
 }
 
 article ul li button .votePostHeader .votePostTitle {
@@ -37,33 +54,23 @@ article ul li button .votePostHeader .votePostTitle {
   overflow: hidden;
   text-align: left;
   display: -webkit-box;
-  margin-right: 10px;
-  padding: 20px 10px;
+  margin-right: 10px 5px 10px 10px;
+  padding: 10px;
   font-size: 30px;
   font-family: "NelnaLizzyChae";
-}
-
-article ul li button .votePostHeader .votePostCompleted {
-  width: 50px;
-  padding: 2px 7px 1px 7px;
-  font-size: 12px;
-  font-weight: 500;
-  border: 1px solid rgb(129, 58, 196);
-  border-radius: 10px;
-  color: white;
-  background-color: rgb(138, 71, 201);
 }
 
 article ul li button .votePostContent {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  height: 80px;
+  height: 36px;
 }
 
 article ul li button .votePostContent .votePostCreator {
   padding: 3px 2px 2px 3px;
-  font-size: 18px;
+  font-size: 16px;
+  font-family: 'BMJUA';
   border: 2px rgba(138, 71, 201, 0.386);
   border-radius: 0 10px 0 0;
   border-style: dashed dashed none none;
@@ -71,26 +78,9 @@ article ul li button .votePostContent .votePostCreator {
 
 article ul li button .votePostContent .votePostExpirationDate {
   padding: 3px 2px 2px 3px;
-  font-size: 18px;
+  font-size: 16px;
+  font-family: 'BMJUA';
   border: 2px rgba(138, 71, 201, 0.386);
   border-radius: 10px 0 10px 0;
   border-style: dashed none none dashed;
-}
-
-article .headerBtnGroup {
-  margin-bottom: 30px;
-}
-
-article .headerBtnGroup ul {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-}
-
-article .headerBtnGroup ul li {
-  width: 150px;
-  height: 100%;
-  border: none;
-  border-radius: 5px;
-  border-bottom: 5px solid rgb(138, 71, 201);
 }

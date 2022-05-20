@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap');
 @font-face {
   font-family: "NelnaLizzyChae";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/NelnaLizzyChae.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BMJUA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +31,7 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  font-family: 'Gothic A1', sans-serif;
   vertical-align: baseline;
 }
 
@@ -79,6 +87,8 @@ button, input {
 button {
   padding: 5px 10px;
   border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
   color: white;
   background-color: rgb(138, 71, 201);
   cursor: pointer;
@@ -105,15 +115,19 @@ header .header {
 header .logo a {
   display: flex;
   align-items: center;
-  font-family: "Pacifico", cursive;
-  color: rgb(107, 63, 151);
-  font-size: 24px;
 }
 
 header .logo a img {
   height: 40px;
   margin: 10px;
   opacity: 0.95;
+}
+
+header .logo a span {
+  font-size: 24px;
+  font-family: "Pacifico", cursive;
+  color: rgb(107, 63, 151);
+  text-shadow: 1px 1px 3px rgba(138, 71, 201, 0.39);
 }
 
 header .headerBtnGroup {
@@ -124,18 +138,9 @@ header .headerBtnGroup button {
   margin: 10px;
 }
 
-header .headerBtnGroup .login .logtinBtn,
-header .headerBtnGroup .signup .signupBtn {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  background-color: rgb(138, 71, 201);
-  cursor: pointer;
-}
-
 article {
   width: 100%;
   height: 100vh;
   padding: 110px 0 10px 0;
-  background-color: rgb(252, 249, 255);
+  background-color: rgb(253, 251, 255);
 }
